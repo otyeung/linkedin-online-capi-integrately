@@ -4,15 +4,10 @@ import './App.css' // Importing styles
 import axios from 'axios'
 import Modal from './Modal' // Assuming you have a Modal component
 
-// Declare analytics function in window object to avoid TypeScript error
-// declare global {
-//   interface Window {
-//     analytics: any
-//   }
-// }
 declare global {
   interface Window {
     lintrk: (action: string, data: { conversion_id: number }) => void
+    ig: any
   }
 }
 
@@ -104,26 +99,18 @@ const ContactForm: React.FC = () => {
       const userEmail = formData.email
       const li_fat_id = formData.li_fat_id
       const firstName = formData.firstName
+
       const lastName = formData.lastName
       const title = formData.title
       const company = formData.company
       const countryCode = formData.countryCode
 
-      // Dreamdata will set userId and traits.li_fat_id based on formData.li_fat_id
-      // window.analytics.identify(li_fat_id, {
-      //   email: userEmail,
-      //   first_name: firstName,
-      //   last_name: lastName,
-      //   title: title,
-      //   company: company,
-      //   country: countryCode,
-      //   li_fat_id: li_fat_id,
-      // })
-
-      // Track the form submission event
-      //      window.analytics.track('Form Submit')
-
+      // Fire Insight Tags Form Submit conversion
       window.lintrk('track', { conversion_id: 16151356 })
+
+      // Fire Integrately Form Submit conversion
+      window.ig.init('b3f71914b09c4e7bb996d3f350c8de47')
+      window.ig.sendEvent('onclick', { conversion_id: 16151364 }, false)
 
       console.log('Form submitted successfully')
       setSubmissionStatus('success')

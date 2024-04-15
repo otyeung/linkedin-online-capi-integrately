@@ -1,75 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Dreamdata Analytics Integration Script -->
-    <!--     <script>
-      !(function () {
-        window.analytics || (window.analytics = []),
-          (window.analytics.methods = [
-            'identify',
-            'track',
-            'trackLink',
-            'trackForm',
-            'trackClick',
-            'trackSubmit',
-            'page',
-            'pageview',
-            'ab',
-            'alias',
-            'ready',
-            'group',
-            'on',
-            'once',
-            'off',
-            'setAnonymousId',
-          ]),
-          (window.analytics.factory = function (a) {
-            return function () {
-              var t = Array.prototype.slice.call(arguments)
-              return t.unshift(a), window.analytics.push(t), window.analytics
-            }
-          })
-        for (var a = 0; a < window.analytics.methods.length; a++) {
-          var t = window.analytics.methods[a]
-          window.analytics[t] = window.analytics.factory(t)
-        }
-        ;(analytics.load = function (a, t) {
-          if (!document.getElementById('dreamdata-analytics')) {
-            ;(t = t || 'cdn.dreamdata.cloud'),
-              (window.__DD_TEMP_ANALYTICS__ = window.analytics)
-            var i = document.createElement('script')
-            ;(i.async = !0),
-              (i.id = 'dreamdata-analytics'),
-              (i.type = 'text/javascript'),
-              (i.src =
-                'https://' + t + '/scripts/analytics/v1/dreamdata.min.js'),
-              i.addEventListener(
-                'load',
-                function (i) {
-                  if (analytics && analytics.initialize)
-                    for (
-                      analytics.initialize({
-                        'Dreamdata.io': { apiKey: a, host: t },
-                      });
-                      window.__DD_TEMP_ANALYTICS__.length > 0;
-
-                    ) {
-                      var n = window.__DD_TEMP_ANALYTICS__.shift(),
-                        e = n.shift()
-                      analytics[e] && analytics[e].apply(analytics, n)
-                    }
-                },
-                !1
-              )
-            var n = document.getElementsByTagName('script')[0]
-            n.parentNode.insertBefore(i, n)
-          }
-        }),
-          analytics.load('9e037f84-fecb-40c5-88b2-1871bc190275'),
-          analytics.page()
-      })()
-    </script> -->
-
     <!-- Meta Tags -->
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -129,5 +60,7 @@
         src="https://px.ads.linkedin.com/collect/?pid=5806284&fmt=gif"
       />
     </noscript>
+
+    <script src="https://cdn.jsdelivr.net/gh/CompanyHub-IG/Integrately-Public-Analytics-via-Webhook@latest/integratelyWebhookLibrary.js"></script>
   </body>
 </html>
