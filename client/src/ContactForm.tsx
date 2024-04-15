@@ -10,6 +10,11 @@ import Modal from './Modal' // Assuming you have a Modal component
 //     analytics: any
 //   }
 // }
+declare global {
+  interface Window {
+    lintrk: (action: string, data: { conversion_id: number }) => void
+  }
+}
 
 // Define type/interface for form data
 interface FormData {
@@ -118,6 +123,8 @@ const ContactForm: React.FC = () => {
       // Track the form submission event
       //      window.analytics.track('Form Submit')
 
+      window.lintrk('track', { conversion_id: 16151356 })
+
       console.log('Form submitted successfully')
       setSubmissionStatus('success')
       setIsModalOpen(true)
@@ -147,7 +154,7 @@ const ContactForm: React.FC = () => {
     <>
       <div className='App'>
         <form className='centered-form' onSubmit={handleSubmit}>
-          <h1 className='form-title'>LinkedIn Online CAPI with Dreamdata</h1>
+          <h1 className='form-title'>LinkedIn Online CAPI with Integrately</h1>
 
           <label>
             li_fat_id:
