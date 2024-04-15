@@ -75,7 +75,7 @@ const ContactForm: React.FC = () => {
     )
 
     // Fire Integrately page view conversion, it will send li_fat_id implicitly
-    window.ig.sendEvent('pageView', '', false)
+    window.ig.sendEvent('pageView', '', true)
   }, []) // Empty dependency array ensures it runs only once
 
   // Begin Cookie routine
