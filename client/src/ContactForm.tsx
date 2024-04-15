@@ -2,7 +2,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './App.css' // Importing styles
 import axios from 'axios'
-import Modal from './Modal' // Assuming you have a Modal component
+import Modal from './Modal'
+import sha256 from 'crypto-js/sha256'
 
 declare global {
   interface Window {
@@ -24,6 +25,11 @@ interface FormData {
   value: string
   acxiomId: string
   oracleMoatId: string
+}
+
+// Function to generate hashed email using SHA-256
+const generateHashedEmail = (email: string): string => {
+  return sha256(email).toString().toLowerCase()
 }
 
 const initialFormData: FormData = {
@@ -57,17 +63,19 @@ const ContactForm: React.FC = () => {
       if (li_fat_id && !isAnalyticsExecuted.current) {
         setFormData((prevData) => ({ ...prevData, li_fat_id }))
 
-        // window.analytics.identify(li_fat_id, {
-        //   li_fat_id: li_fat_id,
-        // })
-
-        // window.analytics.track('Page View')
-
         isAnalyticsExecuted.current = true
       }
     }
 
     fetchData()
+
+    // Initialize Integrately webhook endpoint
+    window.ig.init(
+      'https://webhooks.integrately.com/a/webhooks/b3f71914b09c4e7bb996d3f350c8de47'
+    )
+
+    // Fire Integrately page view conversion, it will send li_fat_id implicitly
+    window.ig.sendEvent('pageView', '', false)
   }, []) // Empty dependency array ensures it runs only once
 
   // Begin Cookie routine
@@ -96,10 +104,8 @@ const ContactForm: React.FC = () => {
         formData
       )
 
-      const userEmail = formData.email
-      const li_fat_id = formData.li_fat_id
+      const hashedEmail = generateHashedEmail(formData.email)
       const firstName = formData.firstName
-
       const lastName = formData.lastName
       const title = formData.title
       const company = formData.company
@@ -108,9 +114,18 @@ const ContactForm: React.FC = () => {
       // Fire Insight Tags Form Submit conversion
       window.lintrk('track', { conversion_id: 16151356 })
 
+      // Prepare the CAPI payload for form submit
+      const capi_payload = {
+        hashed_email: hashedEmail,
+        first_name: firstName,
+        last_name: lastName,
+        title: title,
+        company: company,
+        country: countryCode,
+      }
+
       // Fire Integrately Form Submit conversion
-      window.ig.init('b3f71914b09c4e7bb996d3f350c8de47')
-      window.ig.sendEvent('onclick', { conversion_id: 16151364 }, false)
+      window.ig.sendEvent('formSubmit', capi_payload, false)
 
       console.log('Form submitted successfully')
       setSubmissionStatus('success')
