@@ -166,9 +166,8 @@ const ContactForm: React.FC = () => {
           <label>
             Last Name:
             <input
-              id='address.last_name'
               type='text'
-              name='address.last_name'
+              name='lastName'
               value={formData.lastName}
               onChange={handleChange}
             />
@@ -177,9 +176,8 @@ const ContactForm: React.FC = () => {
           <label>
             First Name:
             <input
-              id='address.first_name'
               type='text'
-              name='address.first_name'
+              name='firstName'
               value={formData.firstName}
               onChange={handleChange}
             />
@@ -218,9 +216,8 @@ const ContactForm: React.FC = () => {
           <label>
             Country Code:
             <input
-              id='address.country'
               type='text'
-              name='address.country'
+              name='countryCode'
               value={formData.countryCode}
               onChange={handleChange}
             />
