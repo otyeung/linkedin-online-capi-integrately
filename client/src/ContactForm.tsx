@@ -176,6 +176,7 @@ const ContactForm: React.FC = () => {
           <label>
             First Name:
             <input
+              id='firstName'
               type='text'
               name='firstName'
               value={formData.firstName}
